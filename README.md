@@ -14,4 +14,11 @@
 |-|-|
 |01|[Cap-01](/js/cap01/exercicios/)|
 
+# Anotações 
+- anotações usando obsidian
+
+|Anotações|Pasta|
+|-|-|
+|LPD|[Aqui](/notas-obsidian/Índice.md)|
+
 ### [Extras](/desafio_daniel/README.md)
