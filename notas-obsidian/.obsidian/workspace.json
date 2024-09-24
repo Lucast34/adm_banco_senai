@@ -11,11 +11,28 @@
             "id": "9e7b65c8c868ee62",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Js/LDP.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7ac6b21b43fc2586",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Js/Html.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -44,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#aula",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +82,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "343baa9803a49544",
@@ -81,6 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Js/Html.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Js/Html.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -109,7 +128,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": false
               }
             }
           },
@@ -118,7 +137,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Js/Html.md"
+              }
             }
           }
         ],
@@ -126,7 +147,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 483.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -138,17 +160,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9e7b65c8c868ee62",
+  "active": "15caa1e8190c01b2",
   "lastOpenFiles": [
-    "abdd/NonSQL.md",
     "Js/LDP.md",
+    "Js/Html.md",
+    "Índice.md",
+    "Pag.2.md",
+    "Pag.1.md",
+    "abdd/NonSQL.md",
     "Pag.5.md",
     "Pag.4.md",
     "Pag.3.md",
-    "Pag.2.md",
-    "Pag.1.md",
     "abdd/SQL.md",
-    "Índice.md",
     "Js",
     "abdd/Banco de dados.md",
     "abdd",
