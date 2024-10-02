@@ -12,7 +12,7 @@ frm.addEventListener('submit', (e) => {
     alert(media.toFixed(2));
 
 // se media >=7 então "Aprovado" senão "Reprovado"
-
+// alert(media >= 7)
 if (media >= 7){
     alert("Aprovado ")
 } else{
