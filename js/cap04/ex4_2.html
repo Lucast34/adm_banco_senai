@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang = 'pt-br'>
     <head>
-    <h1>Lan House</h1>
+    <h1>Balança</h1>
     </head>
     <body>
         <form on submite="return ">
+           
             <p>Nome
                 <input type = 'tex' id = 'inNom' required>
             </p>
             <p> Sexo:
-                <input type= 'radio' name="sexo" id="inMas" required > Masculino>
-                <input type= 'radio' name="sexo" id="inFem" required > Femimnino>
+                <input type= 'radio' name="sexo" id="inMas" required > Masculino 
+                <input type= 'radio' name="sexo" id="inFem" required > Femimnino 
             </p>
             <p> Altura
                 <input type = 'number' step="0.01" id="inAL" >
             </p>
-            <input type = "sumbit" value="Calcular o peso ideal">
-            <input type = "reset" value="Limpar Campos">
-
+            <input type = "submit" value="Calcular o peso ideal">
+            <input type = "reset" value="Limpar Campos" onreset="limpar()">
+            <script src="js-ex/ex4_2.js"></script>
         </form>
         <h3></h3>
     </body>
