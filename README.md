@@ -14,7 +14,7 @@
 |-|-|
 |01|[Cap-01](/js/cap01/exercicios/)|
 |02|[Cap-02](/js/cap02/exercicios/html/)
-|03|[Cap-04](/js/cap04/js-ex/)
+|03|[Cap-04](/js/cap04/exercicios/)
 
 # Anotações 
 - anotações usando obsidian
