@@ -1,12 +1,9 @@
-function calcular (){
-    alert('1')
-    
+function calcular (){  
     const nome = document.getElementById('inNom').value; 
     const masculimo = document.getElementById('inMas').checked; 
     const altura = document.getElementById('inAL').value; 
 
     let peso = masculimo ? Math.pow(altura,2) * 22 : Math.pow(altura,2) * 21;
-    alert('2')
     document.querySelector("h3").innerText = `${nome}: Peso ideal ${peso.toFixed(2)}`;
     
     return false; // impedir o refresh da página equivalente ao e.preventDefault()
