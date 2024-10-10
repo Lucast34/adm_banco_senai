@@ -58,7 +58,13 @@
                 "js/cap04/exercicios/ex4_b.html",
                 "js/cap04/exercicios/ex4_c.html",
                 "js/cap04/exercicios/ex4_d.html"]
+            let cap = ""
             for (let i = 0; i<arquivos.length; i++) {
+                let url = arquivos[i].split("/")
+                if (cap != url[1]){
+                    cap = url[1]
+                    document.write(`<h3>${cap.replace("cap","Capitulo ")}</h3>`)
+                }
                 let link = arquivos[i]
                 .substring(9)
                 .replace('.html', '')
