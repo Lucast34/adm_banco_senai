@@ -28,19 +28,51 @@
         </ul>
         <h1>Exemplo de laço de repetição</h1>
         <ul>
+            <li><a href="">link</a></li>
             <script>
                 const arquivos = [
-                "Arquivo 01", 
-                "Arquivo 02"];
-                for (let i=0 ; i < arquivos.length; i++){
-                    document.write(arquivos[i])
-                }
+                "js/cap01/ex-01.html",
+                "js/cap01/ex-01_2.html",
+                "js/cap01/ex-01_3.html",
+                "js/cap01/ex-01_4.html",
+                "js/cap01/ex-01_5.html",
+                "js/cap01/ex-01_6.html",
+                "js/cap01/ex-01_7.html",
+                "js/cap01/ex-01_8.html",
+                "js/cap01/exercicios/resp_a.html",
+                "js/cap01/exercicios/resp_b.html",
+                "js/cap01/exercicios/resp_c.html",
+                "js/cap01/exercicios/resp_d.html",
+                "js/cap02/exercicios/html/ex2_3.html",
+                "js/cap02/exercicios/html/ex2_4.html",
+                "js/cap02/exercicios/html/ex2_a.html",
+                "js/cap02/exercicios/html/ex2_b.html",
+                "js/cap02/exercicios/html/ex2_c.html",
+                "js/cap04/ex4_1.html",
+                "js/cap04/ex4_2.html",
+                "js/cap04/ex4_3.html",
+                "js/cap04/exercicios/ex4_4.html",
+                "js/cap04/exercicios/ex4_5.html",
+                "js/cap04/exercicios/ex4_6.html",
+                "js/cap04/exercicios/ex4_a.html",
+                "js/cap04/exercicios/ex4_b.html",
+                "js/cap04/exercicios/ex4_c.html",
+                "js/cap04/exercicios/ex4_d.html"]
+            for (let i = 0; i<arquivos.length; i++) {
+                let link = arquivos[i]
+                .substring(9)
+                .replace('.html', '')
+                .replace("exercicios/",'')
+                .replace("html/",'')
+                .replace("ex-0",'ex')
+                .replace("ex",'Exemplo')
+                .replace("resp","Resposta ")
+                document.write(`<li><a href="${arquivos[i]}">  ${link}</a></li>`);
+                
+            }
             </script>
-            <li><a href="./js/cap04/exercicios/ex4_a.html">Ex-a</a></li>
-            <li><a href="./js/cap04/exercicios/ex4_b.html">Ex-b</a></li>
-            <li><a href="./js/cap04/exercicios/ex4_c.html">Ex-c</a></li>
-            <li><a href="./js/cap04/exercicios/ex4_d.html">Ex-d</a></li>
         </ul>
     </body>
 </html>
-
+        
+<!--i+1-->
