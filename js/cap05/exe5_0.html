@@ -16,5 +16,17 @@
             document.write(i+", ")
         }
     </script>
+    <h1>While</h1>
+    <script>
+        let senha = ""
+        let tentativa =0 
+        while(senha!= "1234"){
+            senha = prompt("Digite a senha: ")
+            document.write("Tentativa! <b>")
+            tentativa++
+        }
+        document.write("Você acertou a senha em "+tentativa+" tentativas!")
+        document.write("Você acertou a senha depois de" +tentativa )
+    </script>
 </body>
 </html>
