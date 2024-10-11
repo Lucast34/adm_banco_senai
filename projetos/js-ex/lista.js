@@ -1,4 +1,4 @@
-frm = document.querySelector("form")
+const frm = document.querySelector("form")
 
 frm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -7,7 +7,14 @@ frm.addEventListener("submit", (e) => {
 })
 
 let lista = []
-
+const tbody = document.querySelector("tbody")
 function incluir(){
-    lista.push(frm.inItem.value) 
+    lista.push(frm.inItem.value)
+    tbody.innerHTML +=`<tr>
+                        <td>${frm.inItem.value}</td>
+                        </tr>` 
+}
+
+function atualizarLista(){
+    tbody.innerHTML +=`<tr><td>${frm.inItem.value}</td></tr>`
 }
