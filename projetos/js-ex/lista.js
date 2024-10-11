@@ -9,5 +9,5 @@ frm.addEventListener("submit", (e) => {
 let lista = []
 
 function incluir(){
-    
+    lista.push(frm.inItem.value) 
 }
