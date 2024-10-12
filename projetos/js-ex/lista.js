@@ -36,8 +36,10 @@ function editar(i){
 }
 
 function excluir(i){
-    lista.splice(frm.inID.value, 1)
-    atualizarLista()
+    if(frm.inID.value != ""){
+        lista.splice(frm.inID.value, 1)
+        atualizarLista()
+    }
 }
 
 function atualizar(i){
