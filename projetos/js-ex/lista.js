@@ -22,4 +22,7 @@ function atualizarLista(){
     //tbody.innerHTML +=`<tr><td>${frm.inItem.value}</td></tr>`
 }
 
-function 
+function editar(i){
+    frm.inItem.value = lista[i]
+    frm.inID= i
+}
