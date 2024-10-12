@@ -2,7 +2,12 @@ const frm = document.querySelector("form")
 
 frm.addEventListener("submit", (e) => {
     e.preventDefault();
-    incluir();
+    let id = frm.inID.value
+    if (id != ""){
+        atualizar(id)
+    } else{
+        incluir()
+    }
 
 })
 
@@ -21,10 +26,21 @@ function atualizarLista(){
     for(let i in lista){
         tbody.innerHTML += `<tr><td onclick="editar(${i})">${lista[i]}</td></tr>`
     }
+    frm.reset();
     //tbody.innerHTML +=`<tr><td>${frm.inItem.value}</td></tr>`
 }
 
 function editar(i){
     frm.inItem.value = lista[i]
     frm.inID.value= i
+}
+
+function excluir(i){
+    lista.splice(i, 1)
+    atualizarLista()
+}
+
+function atualizar(i){
+    lista[i]= frm.inItem.value
+    atualizarLista()
 }
