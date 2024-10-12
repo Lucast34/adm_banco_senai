@@ -24,5 +24,5 @@ function atualizarLista(){
 
 function editar(i){
     frm.inItem.value = lista[i]
-    frm.inID= i
+    frm.inId,value= i
 }
