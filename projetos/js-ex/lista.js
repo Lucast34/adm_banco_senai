@@ -9,12 +9,17 @@ frm.addEventListener("submit", (e) => {
 let lista = []
 const tbody = document.querySelector("tbody")
 function incluir(){
-    lista.push(frm.inItem.value)
-    tbody.innerHTML +=`<tr>
-                        <td>${frm.inItem.value}</td>
-                        </tr>` 
+    lista.push(frm.inItem.value);
+   atualizarLista();
+   alert("Item nas lista");
 }
 
 function atualizarLista(){
-    tbody.innerHTML +=`<tr><td>${frm.inItem.value}</td></tr>`
+    tbody.innerHTML =""
+    for(let i in lista){
+        tbody.innerHTML += `<tr><td onlick="alert(${i})">${lista[i]}</td></tr>`
+    }
+    //tbody.innerHTML +=`<tr><td>${frm.inItem.value}</td></tr>`
 }
+
+function 
