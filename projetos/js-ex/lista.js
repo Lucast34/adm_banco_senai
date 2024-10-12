@@ -36,7 +36,7 @@ function editar(i){
 }
 
 function excluir(i){
-    lista.splice(i, 1)
+    lista.splice(frm.inID.value, 1)
     atualizarLista()
 }
 

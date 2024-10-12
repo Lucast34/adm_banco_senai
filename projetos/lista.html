@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        td {
+            cursor : pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Gerenciador Lista</h1>
     <form>
         <p>
             ID:
-            <input type="number" id="inID" disabled>
+            <input type="number" id="inID" disabled required>
         </p>
         <p>
             Item:
             <input type="text" id="inItem">
         </p>
         <input type="submit" value="Gravar">
+        <input type="button" value="Apagar" onclick="excluir()">
+        <input type="reset" value="Novo">
     </form>
     <table>
         <thead>
