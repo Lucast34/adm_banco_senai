@@ -23,4 +23,9 @@
 |-|-|
 |LPD|[Aqui](/notas-obsidian/Índice.md)|
 
+## BDD
+|Exercícios|Raws|
+|-|-|
+|01|[Raws-01](/BDD/Ex-01/raw/)
+
 ### [Extras](/desafio_daniel/README.md)
