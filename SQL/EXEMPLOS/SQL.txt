@@ -1,0 +1,28 @@
+create table partidas(
+id_partida int,
+rodada_camp int,
+data date,
+horario varchar(150),
+resultado varchar(150),
+id_time_casa int not null,
+id_time_visitante int not null,
+id_estadio int not null,
+constraint PK_partida primary key(id_partida),
+constraint FK_time_casa foreign key(id_time_casa) references time(id_time),
+constraint FK_time_vsitante foreign key(id_time_visitante) references time(id_time),
+constraint FK_estadio foreign key(id_estadio) references estadio(id_estadio));
+
+
+create table evento(
+id_eventos int,
+constraint PK_eventos primary key(id_eventos),
+descricao varchar(150));
+
+create table ReLista_eventos(
+id_jogador int not null,
+id_eventos int not null,
+id_partida int not null,
+tempo int,
+constraint FK_jogador foreign key(id_jogador) references jogador(id_jogador),
+constraint FK_eventos foreign key(id_eventos) references evento(id_eventos),
+constraint FK_partida foreign key(id_partida) references partidas(id_partida));
