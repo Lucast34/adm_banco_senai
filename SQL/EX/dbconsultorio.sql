@@ -5,7 +5,7 @@ create table sala(
 	crm int not null,
 	numero_sala int not null unique check(numero_sala > 1 and numero_sala < 50),
     andar int not null check(andar <12),
-    constraint Fk_medico foreign key (crm) references medico(crm)
+    constraint Fk_medicosala foreign key (crm) references medico(crm)
 );
 
 create table medico(
