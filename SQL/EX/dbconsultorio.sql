@@ -27,9 +27,7 @@ create table paciente(
     cidade char(30) default('Taguatinga'),
     doenca varchar(40) not null,
     plano_saude varchar(40) not null default('SUS'),
-    crm int not null,
-    constraint Pk_paciente primary key(id_paciente),
-    constraint Fk_crm foreign key(crm) references medico(crm)
+    constraint Pk_paciente primary key(id_paciente)
 );
 
 create table funcionarios(
