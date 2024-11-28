@@ -243,37 +243,305 @@ group by
 
 /*25. Listar a quantidade de filmes classificados como "G" por categoria.*/
 
+select 
+	c.nome as nome, count(f.titulo) as filmes ,f.classificacao as classificação
+from 
+	categoria as c
+inner join
+	filme_categoria as fc
+on
+	c.categoria_id = fc.categoria_id
+inner join 
+	filme as f
+on -- on usa somente o id, e cruze as dua tabelas 
+	fc.filme_id = f.filme_id
+where 
+	f.classificacao = 'G'
+group by -- group by tem que ter o mesmo numero de colunas que o select, agrupar linhas com o mesmo valor 
+	c.nome, f.classificacao
+order by -- ordenar ou classificar 
+	c.nome, f.classificacao;
+    
 /*26. Listar a quantidade de filmes classificados como "G" OU "PG" por categoria.*/
+
+select 
+	c.nome as nome, count(f.titulo) as filmes ,f.classificacao as classificação
+from 
+	categoria as c
+inner join
+	filme_categoria as fc
+on
+	c.categoria_id = fc.categoria_id
+inner join 
+	filme as f
+on -- on usa somente o id, e cruze as dua tabelas 
+	fc.filme_id = f.filme_id
+where 
+	f.classificacao in ('G','PG') -- uso do in 
+	-- f.classificacao = 'G' or f.classificacao ='PG'
+group by -- group by tem que ter o mesmo numero de colunas que o select, agrupar linhas com o mesmo valor 
+	c.nome, f.classificacao
+order by -- ordenar ou classificar 
+	c.nome, f.classificacao;
 
 /*27. Listar a quantidade de filmes por categoria e classificação.*/
 
+select 
+	c.nome, count(f.titulo), f.classificacao
+from 
+	filme as f
+inner join 
+	filme_categoria as fc
+on 
+	f.filme_id = fc.filme_id
+inner join 
+	categoria as c
+on
+	c.categoria_id = fc.categoria_id
+group by 
+	c.nome, f.classificacao;
+	
+
 /*28. Qual a quantidade de filmes por Ator ordenando decrescente por quantidade?*/
 
+select 
+	count(f.titulo) as filmes, concat(a.primeiro_nome,' ', a.ultimo_nome) -- concatenanado 
+	as autores
+from 
+	filme as f
+inner join 
+	filme_ator as fa
+on 
+	f.filme_id = fa.filme_id
+inner join 
+	ator as a
+on 
+	a.ator_id = fa.ator_id 
+group by 
+	autores
+order by 
+	autores desc;
 /*29. Qual a quantidade de filmes por ano de lançamento ordenando por quantidade crescente?*/
+select ano_de_lancamento from filme;
+
+select 
+	count(titulo) as filmes , ano_de_lancamento as Ano 
+from 
+	filme
+group by -- sempre necessario quando usar uma função 
+	Ano
+order by 
+	Ano asc;
 
 /*30. Listar os anos de lançamento que possuem mais de 400 filmes?*/
 
+select 
+	count(titulo) as filmes , ano_de_lancamento as Ano 
+from 
+	filme
+group by -- sempre necessario quando usar uma função 
+	Ano
+having 
+	filmes > 400
+order by 
+	Ano asc;
+
 /*31. Listar os anos de lançamento dos filmes que possuem mais de 100 filmes com preço da locação maior que a média do preço da locação dos filmes da categoria "Children"?*/
 
+    select ano_de_lancamento, count(*) qt_filme from filme 
+    where preco_da_locacao > (
+        select avg(preco_da_locacao) from filme as f 
+        inner join filme_categoria as fc on f.filme_id = fc.filme_id
+        inner join categoria as c on c.categoria_id = fc.categoria_id
+        where c.nome = 'Children'
+    )
+    group by ano_de_lancamento
+    having count(*) > 100
+    ;
 /*32. Quais as cidades e seu pais correspondente que pertencem a um país que inicie com a Letra “E”?*/
+
+ select 
+	c.cidade, p.pais 
+from 
+	cidade as c
+ inner join 
+	pais as p
+on
+	p.pais_id = c.cidade_id
+group by
+	c.cidade, p.pais
+having
+	pais like 'E%' 
+ ;
 
 /*33. Qual a quantidade de cidades por pais em ordem decrescente?*/
 
+select 
+	count(*) as cidades , p.pais 
+from 
+	pais as p
+inner join 
+	cidade as c
+on  
+	c.pais_id = p.pais_id
+group by
+	p.pais
+order by 
+	cidades desc;
+
 /*34. Qual a quantidade de cidades que iniciam com a Letra “A” por pais em ordem crescente?*/
+
+select 
+	count(*) as cidades , p.pais 
+from 
+	pais as p
+inner join 
+	cidade as c
+on  
+	c.pais_id = p.pais_id
+where 
+	cidade like 'A%'
+group by
+	p.pais
+order by 
+	cidades asc;
 
 /*35. Quais os países que possuem mais de 3 cidades que iniciam com a Letra “A”?*/
 
+select 
+	count(*) as cidades , p.pais 
+from 
+	pais as p
+inner join 
+	cidade as c
+on  
+	c.pais_id = p.pais_id
+where 
+	cidade like 'A%' 
+    -- and pais >= 3
+group by
+	p.pais
+having -- Filtra resultados do count e funções do group by
+	cidades > 3
+order by 
+	cidades;
+
+
 /*36. Quais os países que possuem mais de 3 cidades que iniciam com a Letra “A” ou tenha "R" ordenando por quantidade crescente?*/
+
+select 
+	count(*) as cidades , p.pais 
+from 
+	pais as p
+inner join 
+	cidade as c
+on  
+	c.pais_id = p.pais_id
+where 
+	cidade like 'A%' or cidade like 'R%'
+    -- and pais >= 3
+group by
+	p.pais
+having 
+	cidades > 3
+order by 
+	cidades asc;
+
 
 /*37. Quais os clientes moram no país “United States”?*/
 
+select clie.primeiro_nome as nome, c.cidade as cidade , p.pais as pais 
+from
+	cliente as clie
+inner join 
+	endereco as e
+on
+	e.endereco_id = clie.endereco_id
+inner join
+	cidade as c
+on 
+	e.cidade_id = c.cidade_id
+inner join
+	pais as p
+on
+	c.pais_id = p.pais_id
+where
+	pais = 'United States'
+group by
+	nome, cidade, pais;
+
 /*38. Quantos clientes moram no país “Brazil”?*/
+
+select clie.primeiro_nome as nome, c.cidade as cidade , p.pais as pais 
+from
+	cliente as clie
+inner join 
+	endereco as e
+on
+	e.endereco_id = clie.endereco_id
+inner join
+	cidade as c
+on 
+	e.cidade_id = c.cidade_id
+inner join
+	pais as p
+on
+	c.pais_id = p.pais_id
+where
+	pais = 'Brazil'
+group by
+	nome, cidade, pais;
 
 /*39. Qual a quantidade de clientes por pais?*/
 
+
+select count(clie.primeiro_nome) as nome , p.pais as pais 
+from
+	cliente as clie
+inner join 
+	endereco as e
+on
+	e.endereco_id = clie.endereco_id
+inner join
+	cidade as c
+on 
+	e.cidade_id = c.cidade_id
+inner join
+	pais as p
+on
+	c.pais_id = p.pais_id
+group by
+	pais
+order by 
+	nome desc;
+
 /*40. Quais países possuem mais de 10 clientes?*/
 
+select count(clie.primeiro_nome) as nome , p.pais as pais 
+from
+	cliente as clie
+inner join 
+	endereco as e
+on
+	e.endereco_id = clie.endereco_id
+inner join
+	cidade as c
+on 
+	e.cidade_id = c.cidade_id
+inner join
+	pais as p
+on
+	c.pais_id = p.pais_id
+group by
+	pais
+having
+	nome > 10
+order by 
+	nome desc;
+
 /*41. Qual a média de duração dos filmes por idioma?*/
+
+
 
 /*42. Qual a quantidade de atores que atuaram nos filmes do idioma “English”?*/
 
