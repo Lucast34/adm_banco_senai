@@ -558,8 +558,19 @@ group by atores;
 
 
 /*43. Quais os atores do filme “BLANKET BEVERLY”?*/
+-- correção
+    select i.nome, avg(duracao_do_filme) media from filme as f 
+    inner join idioma as i on f.idioma_id = i.idioma_id
+    group by i.nome;
+
 
 /*44. Quais categorias possuem mais de 60 filmes cadastrados?*/
+
+    select i.nome, avg(duracao_do_filme) media from filme as f 
+    inner join idioma as i on f.idioma_id = i.idioma_id
+    group by i.nome;
+
+
 
 /*45. Quais os filmes alugados (sem repetição) para clientes que moram na “Argentina”?*/
 
