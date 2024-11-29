@@ -438,7 +438,7 @@ inner join
 on  
 	c.pais_id = p.pais_id
 where 
-	cidade like 'A%' or cidade like 'R%'
+	cidade like 'A%' or cidade like '%R%'
     -- and pais >= 3
 group by
 	p.pais
@@ -541,9 +541,21 @@ order by
 
 /*41. Qual a média de duração dos filmes por idioma?*/
 
-
+select avg(duracao_do_filme) from filme;
 
 /*42. Qual a quantidade de atores que atuaram nos filmes do idioma “English”?*/
+
+select count(*) as atores, f.titulo,id.nome 
+from filme as f
+inner join idioma as id
+on id.idioma = f.idioma
+inner join filme_ator as fa
+on fa.filme_id = f.filme_id
+inner join ator as a
+on a.ator_id = fa.ator_id
+where id.nome = 'English'
+group by atores;
+
 
 /*43. Quais os atores do filme “BLANKET BEVERLY”?*/
 
