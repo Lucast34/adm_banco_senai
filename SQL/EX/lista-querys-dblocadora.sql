@@ -571,7 +571,6 @@ group by atores;
     group by i.nome;
 
 
-
 /*45. Quais os filmes alugados (sem repetição) para clientes que moram na “Argentina”?*/
 
 /*46. Qual a quantidade de filmes alugados por Clientes que moram na “Chile”?*/
@@ -584,10 +583,81 @@ group by atores;
 
 /*50. Qual a soma da duração dos Filmes por categoria?*/
 
+select count(*) as duracao, c.nome as categoria from filme as f
+inner join filme_categoria as fc
+on f.filme_id = fc.filme_id
+inner join categoria as c
+on c.categoria_id = fc.categoria_id
+group by categoria
+order by duracao desc;
+
+
 /*51. Qual a quantidade de filmes locados mês a mês por ano? */
+
+select * from aluguel;
+
+-- substring
+set lc_time_names = pt_BR;
+select monthname(data_de_aluguel), 
+substring(data_de_aluguel, 6, 2) data_aluguel, 
+count(*) filmes -- pegando a string do mês e renomeando ela, depois contando cada linha 
+from filme f
+inner join inventario iv
+on f.filme_id = iv.filme_id
+inner join aluguel al
+on al.inventario_id = iv.inventario_id
+group by data_aluguel --
+order by filmes asc;
+
+-- another way
+
+set lc_time_names = pt_BR;
+select monthname(data_de_aluguel), 
+substring(data_de_aluguel, 6, 2) mes,
+substring(data_de_aluguel,1,4)ano, 
+count(*) filmes -- pegando a string do mês e renomeando ela, depois contando cada linha 
+from filme f
+inner join inventario iv
+on f.filme_id = iv.filme_id
+inner join aluguel al
+on al.inventario_id = iv.inventario_id
+group by mes,ano --
+order by filmes asc;
+
+-- date function
+
+
 
 /*52. Qual o total pago por classificação de filmes alugados no ano de 2006?*/
 
+select * from aluguel;
+
+select count(*),
+classificacao, 
+sum(valor) as Valor_Total from filme  f
+inner join inventario iv
+on f.filme_id = iv.filme_id 
+inner join aluguel al
+on iv.inventario_id = al.inventario_id
+inner join pagamento pa
+on al.aluguel_id = pa.aluguel_id
+where date_format(data_de_aluguel, '%Y') = 2006
+group by classificacao
+order by classificacao;
+
 /*53. Qual a média mensal do valor pago por filmes alugados no ano de 2005?*/
 
+select 
+		date_format(data_de_aluguel, '%Y') ano, 
+        date_format(data_de_aluguel, '%m') mes,
+        avg(valor) media_pagamento
+from aluguel as a 
+inner join pagamento as p 
+on a.aluguel_id = p.aluguel_id
+where  date_format(data_de_aluguel,'%Y') = 2005
+group by ano , mes;
+
+
 /*54. Qual o total pago por filme alugado no mês de Junho de 2006 por cliente? -----    CORRIGIR  */
+
+select * from cliente
