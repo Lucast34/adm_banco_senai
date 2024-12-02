@@ -573,13 +573,65 @@ group by atores;
 
 /*45. Quais os filmes alugados (sem repetição) para clientes que moram na “Argentina”?*/
 
+/*
+    Instrução SQL CREATE VIEW
+    Em SQL, uma exibição é uma tabela virtual baseada no conjunto de resultados de uma instrução SQL.
+    Uma view contém linhas e colunas, assim como uma tabela real. 
+    Os campos em uma view são campos de uma ou mais tabelas reais no banco de dados.
+    Você pode adicionar instruções e funções SQL a uma exibição e apresentar os dados como se eles 
+    estivessem vindo de uma única tabela.
+    Uma visualização é criada com a CREATE VIEW
+*/
+    create or replace view filme_cliente_pais as (
+    select f.titulo, p.pais from pais as p
+    inner join cidade as c on p.pais_id = c.pais_id
+    inner join endereco as e on c.cidade_id = e.cidade_id
+    inner join cliente as cli on e.endereco_id = cli.endereco_id
+    inner join aluguel as a on cli.cliente_id = a.cliente_id
+    inner join inventario as i on i.inventario_id = a.inventario_id
+    inner join filme as f on f.filme_id = i.filme_id
+    order by f.titulo);
+    
+    select distinct titulo from filme_cliente_pais
+    where pais = 'Argentina';
+
+
+
 /*46. Qual a quantidade de filmes alugados por Clientes que moram na “Chile”?*/
+
+select count(*) qt_aluguel, count(distinct titulo) qt_filme
+    from filme_cliente_pais
+    where pais = 'Chile';
 
 /*47. Qual a quantidade de filmes alugados por funcionario?*/
 
+    select * from funcionario;
+    select * from aluguel;
+    select * from inventario;
+    
+    select f.primeiro_nome, f.ultimo_nome , count(*) quantidade
+    from funcionario as f 
+    inner join aluguel as a on f.funcionario_id = a.funcionario_id
+    inner join inventario as i on i.inventario_id = a.inventario_id
+    group by f.primeiro_nome, f.ultimo_nome;
+
+
 /*48. Qual a quantidade de filmes alugados por funcionario para cada categoria?*/
 
+    select c.nome, fu.primeiro_nome, fu.ultimo_nome, count(*) quantidade
+    from funcionario as fu
+    inner join aluguel as a on fu.funcionario_id = a.funcionario_id
+    inner join inventario as i on i.inventario_id = a.inventario_id
+    inner join filme as f on f.filme_id = i.filme_id
+    inner join filme_categoria as fc on f.filme_id = fc.filme_id
+    inner join categoria as c on fc.categoria_id = c.categoria_id
+    group by c.nome, fu.primeiro_nome, fu.ultimo_nome;
+
+
 /*49. Quais Filmes possuem preço da Locação maior que a média de preço da locação?*/
+
+	select * from filme 
+    where preco_da_locacao > (select avg(preco_da_locacao) from filme);
 
 /*50. Qual a soma da duração dos Filmes por categoria?*/
 
