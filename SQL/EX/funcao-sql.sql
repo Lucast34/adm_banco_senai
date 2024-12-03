@@ -53,22 +53,25 @@ select instr('senai senai','a'), locate('senai senai','a',1);
 
 select lower('SENAI'), upper('senai');
 
--- lpad() / rpad()
+-- lpad() / rpad() Preenche uma string no início ou no fim.
 
 select lpad('hi',10,'0'), rpad('hi',10,'0');
 
--- ltrim() / rtrim()
--- trim()
+-- ltrim() / rtrim() Remove espaços à esquerda ou direita.
+-- trim() Remove caracteres das extremidades.
 select ltrim('	nome	'), rtrim('	nome	'), trim('	nome	');
 
--- mid()
+-- mid() / substring() Extrai parte de uma string.
+SELECT MID('1234-67-90',6,2), SUBSTRING('1234-67-90',6,2);
 
+-- replace() Substitui parte de uma string.
+SELECT REPLACE('SEMAI','M','N');
 
--- replace()
+-- reverse() Inverte a string.
+SELECT REVERSE('123456789');
 
+-- space() Retorna uma string de espaços.
+SELECT CONCAT('X',SPACE(50),'X');
 
--- reverse()
-
--- soundex()
-
--- space()
+-- strcmp() Compara strings, retona 0 quando forem iguais.
+SELECT STRCMP('SENAI','SENAI');
