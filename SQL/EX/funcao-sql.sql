@@ -185,30 +185,79 @@ SELECT WEEK(NOW());
 
 -- 4. Control Flow Functions
 -- IF(): Condicional simples.
+-- metodo 1
 SELECT IF('A' = 'B', 'SIM', 'NÃO');
 SELECT IF(10 >= 7, 'APROVADO', IF(10 >= 4, 'RECUPERACAO', 'REPROVADO'));
 SELECT IF(6 >= 7, 'APROVADO', IF(6 >= 4, 'RECUPERACAO', 'REPROVADO'));
 SELECT IF(2 >= 7, 'APROVADO', IF(2 >= 4, 'RECUPERACAO', 'REPROVADO'));
 
+-- metodo 2
+SELECT IF('A' = 'B', 'SIM', 'NÃO');
+SET @nota = 3; -- declaração de variavel
+SELECT IF(@nota >= 7, 'APROVADO', IF(@nota >= 4, 'RECUPERACAO', 'REPROVADO'));
+
+
 -- CASE: Estrutura de múltiplas condições.
+-- metodo 1
 SELECT CASE WHEN 10 >= 7 THEN 'SIM' ELSE 'NÃO' END ;
 
+--metodo 2
+SELECT CASE WHEN @nota >= 7 THEN 'APROVADO' 
+            WHEN @nota >= 4 THEN 'RECUPERACAO'
+            ELSE 'REPROVADO' END;
+
+
 -- IFNULL(): Substitui NULL por um valor especificado.
+SELECT IFNULL(NULL,0), IFNULL(NULL,'X1');
+
 -- NULLIF(): Retorna NULL se os valores forem iguais.
+SELECT NULLIF('A1','A0'), NULLIF('A','A');
 
 -- 5. Encryption and Hashing Functions
--- AES_ENCRYPT(), AES_DECRYPT(): Criptografia AES.
--- MD5(): Retorna o hash MD5.
 -- SHA1(), SHA2(): Retorna hashes SHA.
+SELECT MD5('123456');
+
+-- MD5(): Retorna o hash MD5.
+SELECT SHA1('abc');
+SELECT SHA2('abc', 224); -- 23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7
+SELECT SHA2('abc', 256); -- ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+SELECT SHA2('abc', 512); -- ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f
+
+-- AES_ENCRYPT(), AES_DECRYPT(): Criptografia AES.
+SET block_encryption_mode = 'aes-256-cbc';
+SET @key_str = SHA2('fase secreta',512);
+SET @init_vector = RANDOM_BYTES(16);
+SET @crypt_str = AES_ENCRYPT('texto para criptografar',@key_str,@init_vector);
+SELECT CAST(AES_DECRYPT(@crypt_str,@key_str,@init_vector) AS CHAR);
+
 
 -- 6. Miscellaneous Functions
 -- VERSION(): Retorna a versão do MySQL.
+SELECT VERSION();
+
 -- DATABASE(): Retorna o banco de dados atual.
+SELECT DATABASE();
+
 -- USER() / CURRENT_USER(): Retorna o usuário conectado.
+SELECT USER(), CURRENT_USER();
+
 -- UUID(): Gera um identificador único.alter
+SELECT UUID()
 
 -- 7. Aggregate Functions
 -- AVG(): Calcula a média.
+SELECT AVG(VALOR) FROM PAGAMENTO;
+
 -- COUNT(): Conta os registros.
+SELECT COUNT(*) FROM PAGAMENTO;
+
 -- MAX(), MIN(): Retorna o maior ou menor valor.
+SELECT MAX(VALOR), MIN(VALOR) FROM PAGAMENTO;
+
 -- SUM(): Soma os valores.
+SELECT SUM(VALOR) FROM PAGAMENTO;
+
+-- GROUP_CONCAT(); Concatena valores de uma coluna em um único resultado, separados por uma vírgula (ou outro delimitador definido).
+SELECT P.PAIS, GROUP_CONCAT(C.CIDADE) CIDADES, COUNT(*) QT FROM PAIS AS P 
+INNER JOIN CIDADE AS C ON P.PAIS_ID = C.PAIS_ID
+GROUP BY P.PAIS;
