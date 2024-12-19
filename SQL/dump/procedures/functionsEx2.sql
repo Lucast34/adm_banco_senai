@@ -83,7 +83,8 @@ select
 	id_visitante,
 	gol_visitante,
 	gol_mandante
-from partida)
+from partida),
+resultados as(
 select 
 	rodada,
 	sigla,
@@ -96,4 +97,21 @@ select
 	if (gol_feito = gol_sofrido,1,0)E,
 	if (gol_feito < gol_sofrido,1,0)D
 from partidas as p
-inner join time as t on t.id_time = p.id_time;
+inner join time as t on t.id_time = p.id_time)
+select row_number() over() C, tb.* from (
+select 	
+    sigla, 
+    nome, 
+    sum(gol_feito) gol_feito, 
+    sum(gol_sofrido) gol_sofrido, 
+    sum(saldo_gols) saldo_gols,
+    sum(pontos) pontos,
+    sum(V) V, 
+    sum(E) E, 
+    sum(D) D,
+    count(*) qt_partidas
+from resultados
+group by 
+	sigla,
+    nome
+   order by pontos desc, V desc, saldo_gols desc, gol_feito desc) tb; 
