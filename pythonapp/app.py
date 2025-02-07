@@ -12,6 +12,8 @@ def home ():
 
 def post_item():
     data = request.get_json()
+    sql = f"INSERT INTO todolist(item, status) VALUES('{data['item']}'),('{data['status']}')" 
+    banco(sql)
     return data
 
 def banco (sql):
@@ -25,7 +27,7 @@ def banco (sql):
             port = "5432",
             dbname = "senaidb_ijdv",
             user = "senaidb_ijdv_user",
-            password = "KVsMrEOmYtCVqIQl8OkhjICC8fwNZeIb"
+            password = ""
         )
 
         cursor = conn.cursor() # cursos vai ser a variavel para executar os comandos SQL
