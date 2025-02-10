@@ -1,5 +1,6 @@
 from flask import Flask, request
 import psycopg2
+import json
 
 app = Flask (__name__)
 
@@ -16,6 +17,11 @@ def post_item():
     banco(sql)
     return data
 
+@app.route('/item', methods=['GET'])
+def delete_item(lineNumer):
+    sql = f'SELECT * FROM todolist'
+    return banco(sql)
+
 @app.route('/item/<int:lineNumber>', methods=['PATCH'])
 def patch_item(lineNumber):
     data = request.get_json()
@@ -23,13 +29,11 @@ def patch_item(lineNumber):
     banco(sql)
     return data
 
-
 @app.route('/item/<int:lineNumber>',methods=['DELETE'])
 def delete_item(lineNumer):
     sql = f'DELETE FROM todolist WHERE \"_lineNumber\" = {lineNumer}'
+    banco(sql)
     return ""
-
-
 
 def banco (sql):
     resultado = ""
@@ -48,6 +52,14 @@ def banco (sql):
         cursor = conn.cursor() # cursos vai ser a variavel para executar os comandos SQL
 
         cursor.execute(sql) # executa o comando sql seja insert, select .. etc
+
+        if sql[0:6] == "INSERT":
+            resultado = cursor.fetchone()[0]
+        elif sql[0:6] == "SELECT":
+            resultado = cursor.fetchall() # vai guardar o resultado do select na var resultado
+            colunas = [desc[0] for desc in cursor.description]
+            resultado = json.dumps([dict(zip(colunas, row)) for row in resultado])
+            resultado = json.loads(resultado)
 
         cursor.close() # finaliz o cursor
 
