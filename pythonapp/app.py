@@ -18,7 +18,7 @@ def post_item():
     return data
 
 @app.route('/item', methods=['GET'])
-def delete_item(lineNumer):
+def get_item():
     sql = f'SELECT * FROM todolist'
     return banco(sql)
 
@@ -30,8 +30,8 @@ def patch_item(lineNumber):
     return data
 
 @app.route('/item/<int:lineNumber>',methods=['DELETE'])
-def delete_item(lineNumer):
-    sql = f'DELETE FROM todolist WHERE \"_lineNumber\" = {lineNumer}'
+def delete_item(lineNumber):
+    sql = f'DELETE FROM todolist WHERE \"_lineNumber\" = {lineNumber}'
     banco(sql)
     return ""
 
@@ -69,6 +69,8 @@ def banco (sql):
 
     except psycopg2.Error as e:
         ("Error na conexão do banco de dados")
+    
+    return resultado
 
 
 if __name__ == '__main__':
