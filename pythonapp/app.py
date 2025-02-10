@@ -16,6 +16,21 @@ def post_item():
     banco(sql)
     return data
 
+@app.route('/item/<int:lineNumber>', methods=['PATCH'])
+def patch_item(lineNumber):
+    data = request.get_json()
+    sql = f"UPDATE todolist SET item = '{data['item']}', status = '{data['status']}' WHERE \"_lineNumber\" = {lineNumber}"
+    banco(sql)
+    return data
+
+
+@app.route('/item/<int:lineNumber>',methods=['DELETE'])
+def delete_item(lineNumer):
+    sql = f'DELETE FROM todolist WHERE \"_lineNumber\" = {lineNumer}'
+    return ""
+
+
+
 def banco (sql):
     resultado = ""
     try:
@@ -27,7 +42,7 @@ def banco (sql):
             port = "5432",
             dbname = "senaidb_ijdv",
             user = "senaidb_ijdv_user",
-            password = ""
+            password = "KVsMrEOmYtCVqIQl8OkhjICC8fwNZeIb"
         )
 
         cursor = conn.cursor() # cursos vai ser a variavel para executar os comandos SQL
