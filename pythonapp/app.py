@@ -1,5 +1,4 @@
-from flask import Flask, request
-import psycopg2
+from flask import Flask, request, render_template
 import json
 
 app = Flask (__name__)
@@ -7,7 +6,7 @@ app = Flask (__name__)
 @app.route('/')
 
 def home ():
-    return "Olá, Flask"
+    return  render_template("index.html")
 
 @app.route("/item", methods = ['POST'])
 
