@@ -100,6 +100,8 @@ async function createRow(payload) {
     */
     const response = await fetch("/item", {
       method: "POST",
+      headers : {'Content=type':'aplication/json'},
+      
       body: JSON.stringify(payload)
     });
     const data = await response.json();
@@ -117,6 +119,7 @@ async function patchRow(lineNumber, payload) {
     const url = "/item/" + lineNumber;
     const response = await fetch(url, {
       method: "PATCH",
+      headers : {'Content':'aplication/json'},
       body: JSON.stringify(payload)
     });
     const data = await response.json();
