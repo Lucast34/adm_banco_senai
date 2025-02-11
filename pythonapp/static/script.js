@@ -100,7 +100,7 @@ async function createRow(payload) {
     */
     const response = await fetch("/item", {
       method: "POST",
-      headers : {'Content=type':'application/json'},
+      headers : {'Content-type':'application/json'},
       
       body: JSON.stringify(payload)
     });
