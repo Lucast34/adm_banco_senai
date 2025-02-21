@@ -29,7 +29,7 @@ begin
     insert into au_pizza(id_pizza, sabor, ingredientes, usuario, data_hora, operacao)
     values(new.id_pizza, new.sabor, new.ingredientes, user(), now(),'insert');
 end$$
-delimiter;
+delimiter ;
 
 drop trigger depois_insert_pizza;
 select trigger;
