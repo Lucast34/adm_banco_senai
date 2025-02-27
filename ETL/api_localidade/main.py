@@ -28,7 +28,7 @@ response_2 = requests.get(url2)
 
 response_3= requests.get(url3)
 
-obj = response.json()
+obj = response_3.json()
 
 # Como os json já em um array com isso não há  uma necessidade "filtrar"
 
@@ -38,10 +38,16 @@ i = 0
 
 while i < len(lista):
     id = lista[i]['id']
-    sigla = lista[i]['sigla']
-    nome = lista[i]['nome']
+    #sigla = lista[i]['sigla']
+    nome = lista[i]['nome'].replace("'", "''")
 
-    sql = f"INSERT INTO macroregiao(id_regiao, sigla, nome) VALUES ('{id}', '{sigla}', '{nome}');"
+    id_MU = lista[i]['microrregiao']['mesorregiao']['UF']['id']
+
+    
+
+    sql = f"INSERT INTO municipio(id_municipio, nome, id_estadoMU) VALUES ('{id}', '{nome}',{id_MU});"
+
+    #print(sql)
 
     banco(sql)
     i += 1
